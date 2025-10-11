@@ -12,7 +12,7 @@ frontend/.env
 backend/.env
 
 # Next.js
-frontend/.next/
+.next/
 frontend/out/
 frontend/build/
 
