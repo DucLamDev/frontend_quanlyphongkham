@@ -23,7 +23,7 @@ const AppointmentForm = () => {
   const onSubmit = async (data) => {
     setIsSubmitting(true)
     try {
-      const response = await axios.post('http://localhost:5000/api/appointments', {
+      const response = await axios.post('https://quanlyphongkham-be.onrender.com/api/appointments', {
         ...data,
         appointmentDate: data.appointmentDate,
         appointmentTime: data.appointmentTime

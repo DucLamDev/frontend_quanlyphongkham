@@ -35,8 +35,8 @@ export default function AppointmentsManagement() {
   const fetchAppointments = async (token) => {
     try {
       const url = filter === 'all' 
-        ? 'http://localhost:5000/api/admin/appointments'
-        : `http://localhost:5000/api/admin/appointments?status=${filter}`
+        ? 'https://quanlyphongkham-be.onrender.com/api/admin/appointments'
+        : `https://quanlyphongkham-be.onrender.com/api/admin/appointments?status=${filter}`
 
       const response = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` }
@@ -56,7 +56,7 @@ export default function AppointmentsManagement() {
     try {
       const token = localStorage.getItem('adminToken')
       const response = await axios.patch(
-        `http://localhost:5000/api/admin/appointments/${id}/status`,
+        `https://quanlyphongkham-be.onrender.com/api/admin/appointments/${id}/status`,
         { status },
         { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -76,7 +76,7 @@ export default function AppointmentsManagement() {
     try {
       const token = localStorage.getItem('adminToken')
       const response = await axios.delete(
-        `http://localhost:5000/api/admin/appointments/${id}`,
+        `https://quanlyphongkham-be.onrender.com/api/admin/appointments/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       )
 

@@ -49,7 +49,7 @@ const Chatbot = () => {
 
     try {
       // Call backend chatbot API
-      const response = await axios.post('http://localhost:5000/api/chatbot', {
+      const response = await axios.post('https://quanlyphongkham-be.onrender.com/api/chatbot', {
         message: message
       })
 

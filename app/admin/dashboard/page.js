@@ -41,7 +41,7 @@ export default function AdminDashboard() {
 
   const fetchDashboardData = async (token) => {
     try {
-      const response = await axios.get('http://localhost:5000/api/admin/stats', {
+      const response = await axios.get('https://quanlyphongkham-be.onrender.com/api/admin/stats', {
         headers: {
           Authorization: `Bearer ${token}`
         }

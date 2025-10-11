@@ -14,7 +14,7 @@ const QuestionForm = () => {
   const onSubmit = async (data) => {
     setIsSubmitting(true)
     try {
-      const response = await axios.post('http://localhost:5000/api/questions', data)
+      const response = await axios.post('https://quanlyphongkham-be.onrender.com/api/questions', data)
 
       if (response.data.success) {
         toast.success('Câu hỏi của bạn đã được gửi thành công! Chúng tôi sẽ phản hồi sớm nhất.')
