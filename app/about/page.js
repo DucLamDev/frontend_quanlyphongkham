@@ -320,23 +320,50 @@ export default function About() {
                 whileHover={{ y: -10 }}
                 className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all group"
               >
-                  <div className="absolute inset-0 flex items-end justify-center">
-                                <Image
-                                  src={member.image}
-                                  alt={member.name}
-                                  width={200}
-                                  height={220}
-                                  className="object-contain object-bottom h-full w-auto"
-                                  unoptimized
-                                />
-                              </div>
-                
-                <div className="p-6">
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">{member.name}</h3>
-                  <p className="text-primary-600 font-semibold mb-2">{member.title}</p>
-                  <p className="text-sm text-gray-600 mb-2">{member.experience}</p>
-                  <p className="text-sm text-gray-500">{member.specialty}</p>
+                     {/* Doctor Image */}
+              <div className="relative h-80 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+                <div className="absolute inset-0 flex items-end justify-center">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    width={300}
+                    height={320}
+                    className="object-contain object-bottom h-full w-auto"
+                    unoptimized
+                  />
                 </div>
+                
+                {/* Badge */}
+                <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-semibold text-primary-600 shadow-md">
+                  {member.experience}
+                </div>
+              </div>
+
+              {/* Doctor Info */}
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-1">
+                  {member.name}
+                </h3>
+                <p className="text-primary-600 font-semibold mb-3">
+                  {member.title}
+                </p>
+                <p className="text-gray-600 mb-4 flex items-start gap-2">
+                  <GraduationCap size={18} className="text-primary-500 mt-1 flex-shrink-0" />
+                  <span>{member.specialty}</span>
+                </p>
+
+                {/* Stats */}
+                <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
+                  <div className="flex items-center gap-1 text-gray-600">
+                    <Award size={16} className="text-primary-500" />
+                    <span className="text-sm">Chuyên gia</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-gray-600">
+                    <Heart size={16} className="text-red-500" />
+                    <span className="text-sm">Tận tâm</span>
+                  </div>
+                </div>
+              </div>
               </motion.div>
             ))}
           </div>
