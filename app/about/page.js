@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Award, Users, Clock, Shield, Heart, Target, CheckCircle, Star } from 'lucide-react'
+import { Award, Users, Clock, Shield, Heart, Target, CheckCircle, Star, GraduationCap } from 'lucide-react'
 import Image from 'next/image'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
