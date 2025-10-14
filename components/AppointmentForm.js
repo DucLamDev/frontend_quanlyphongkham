@@ -6,10 +6,12 @@ import { useForm } from 'react-hook-form'
 import { Calendar, Clock, User, Phone, Mail, FileText, Send, Shield } from 'lucide-react'
 import toast from 'react-hot-toast'
 import axios from 'axios'
+import VoucherPopup from './VoucherPopup'
 
 const AppointmentForm = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [showVoucher, setShowVoucher] = useState(false)
 
   const specialties = [
     'Tư vấn khám',
@@ -30,8 +32,8 @@ const AppointmentForm = () => {
       })
 
       if (response.data.success) {
-        toast.success('Đặt lịch thành công! Chúng tôi đã gửi thông báo đến số điện thoại của bạn.')
         reset()
+        setShowVoucher(true)
       }
     } catch (error) {
       console.error('Error:', error)
@@ -42,24 +44,31 @@ const AppointmentForm = () => {
   }
 
   return (
-    <section id="appointment" className="py-20 bg-gradient-to-br from-blue-50 to-white">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Đặt Lịch Khám Chữa Bệnh
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Điền thông tin vào form dưới đây để đặt lịch khám. Chúng tôi sẽ liên hệ xác nhận trong thời gian sớm nhất.
-          </p>
-        </motion.div>
+    <>
+      <VoucherPopup 
+        isOpen={showVoucher} 
+        onClose={() => setShowVoucher(false)}
+        voucherCode="KHAM10"
+      />
+      
+      <section id="appointment" className="py-20 bg-gradient-to-br from-blue-50 to-white">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Đặt Lịch Khám Chữa Bệnh
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Điền thông tin vào form dưới đây để đặt lịch khám. Chúng tôi sẽ liên hệ xác nhận trong thời gian sớm nhất.
+            </p>
+          </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Left - Form */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -299,9 +308,10 @@ const AppointmentForm = () => {
               </div>
             </div>
           </motion.div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }
 
