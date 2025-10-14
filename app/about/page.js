@@ -320,18 +320,16 @@ export default function About() {
                 whileHover={{ y: -10 }}
                 className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all group"
               >
-                <div className="relative h-56">
-              <div className="absolute inset-0 flex items-end justify-center">
-                  <Image
-                    src={doctor.image}
-                    alt={doctor.name}
-                    width={150}
-                    height={240}
-                    className="object-contain object-bottom h-full w-auto"
-                    unoptimized
-                  />
-                </div>
-                </div>
+                  <div className="absolute inset-0 flex items-end justify-center">
+                                <Image
+                                  src={member.image}
+                                  alt={member.name}
+                                  width={200}
+                                  height={220}
+                                  className="object-contain object-bottom h-full w-auto"
+                                  unoptimized
+                                />
+                              </div>
                 
                 <div className="p-6">
                   <h3 className="text-lg font-bold text-gray-900 mb-2">{member.name}</h3>
