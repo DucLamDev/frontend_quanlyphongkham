@@ -1,4 +1,4 @@
-// File: C:\Users\MSI\Desktop\job_thang10\web_quanlyphongkham_1tr5\frontend\app\recruitment\page.js
+// File: C:\Users\MSI\Desktop\job_thang10\source_deploy\source_FE\app\recruitment\page.js
 import * as entry from '../../../../app/recruitment/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
