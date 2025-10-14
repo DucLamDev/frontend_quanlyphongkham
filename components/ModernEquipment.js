@@ -39,42 +39,42 @@ const ModernEquipment = () => {
       title: 'Máy Xét Nghiệm Tự Động',
       description: 'Hệ thống xét nghiệm tự động với độ chính xác cao',
       features: ['Kết quả nhanh chóng', 'Độ chính xác 99.9%', 'Tự động hóa hoàn toàn'],
-      image: '/img/cosovatchat1.jpg'
+      image: '/img/mayxetnghiemtudong.jpg'
     },
     {
       icon: <Heart className="w-8 h-8" />,
       title: 'Máy Siêu Âm 4D',
       description: 'Công nghệ siêu âm 4D tiên tiến nhất',
       features: ['Hình ảnh 3D rõ nét', 'Theo dõi thai nhi', 'Chẩn đoán chính xác'],
-      image: '/img/cosovatchat2.jpg'
+      image: '/img/sieuam4d.jpg'
     },
     {
       icon: <Eye className="w-8 h-8" />,
       title: 'Máy CT Scanner',
       description: 'Máy chụp cắt lớp vi tính hiện đại',
       features: ['Độ phân giải cao', 'Thời gian chụp nhanh', 'An toàn cho bệnh nhân'],
-      image: '/img/cosovatchat3.jpg'
+      image: '/img/ct.jpg'
     },
     {
       icon: <Brain className="w-8 h-8" />,
       title: 'Máy MRI',
       description: 'Máy cộng hưởng từ hiện đại',
       features: ['Không bức xạ', 'Hình ảnh chi tiết', 'Chẩn đoán chính xác'],
-      image: '/img/cosovatchat4.jpg'
+      image: '/img/MRI.jpg'
     },
     {
       icon: <Shield className="w-8 h-8" />,
       title: 'Máy X-Quang Số',
       description: 'Hệ thống X-quang kỹ thuật số',
       features: ['Giảm bức xạ', 'Kết quả tức thì', 'Lưu trữ điện tử'],
-      image: '/img/cosovatchat5.jpg'
+      image: '/img/xquang2.jpg'
     },
     {
       icon: <Zap className="w-8 h-8" />,
       title: 'Máy Điện Tim',
       description: 'Máy đo điện tim 12 chuyển đạo',
       features: ['Theo dõi liên tục', 'Phát hiện sớm', 'Báo động tự động'],
-      image: '/img/cosovatchat1.jpg'
+      image: '/img/conghuong.jpg'
     }
   ]
 
