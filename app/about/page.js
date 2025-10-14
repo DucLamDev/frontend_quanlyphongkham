@@ -320,13 +320,17 @@ export default function About() {
                 whileHover={{ y: -10 }}
                 className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all group"
               >
-                <div className="relative h-64">
+                <div className="relative h-56">
+              <div className="absolute inset-0 flex items-end justify-center">
                   <Image
-                    src={member.image.replace('/img/', './img/')}
-                    alt={member.name}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    src={doctor.image}
+                    alt={doctor.name}
+                    width={150}
+                    height={240}
+                    className="object-contain object-bottom h-full w-auto"
+                    unoptimized
                   />
+                </div>
                 </div>
                 
                 <div className="p-6">
