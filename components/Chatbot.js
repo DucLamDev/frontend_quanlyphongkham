@@ -73,8 +73,8 @@ const Chatbot = () => {
     try {
       setBookingMetaLoading(true)
       const [specialtyRes, doctorRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/appointments/specialties'),
-        axios.get('http://localhost:5000/api/appointments/providers')
+        axios.get('https://quanlyphongkham-be.onrender.com/api/appointments/specialties'),
+        axios.get('https://quanlyphongkham-be.onrender.com/api/appointments/providers')
       ])
 
       if (specialtyRes.data.success) {
@@ -171,7 +171,7 @@ const Chatbot = () => {
     try {
       setBookingLoading(true)
       setBookingError('')
-      await axios.post('http://localhost:5000/api/appointments', {
+      await axios.post('https://quanlyphongkham-be.onrender.com/api/appointments', {
         fullName: bookingData.fullName,
         phone: bookingData.phone,
         email: bookingData.email,
@@ -219,7 +219,7 @@ const Chatbot = () => {
 
     try {
       // Call backend chatbot API
-      const response = await axios.post('http://localhost:5000/api/chatbot', {
+      const response = await axios.post('https://quanlyphongkham-be.onrender.com/api/chatbot', {
         message: message
       })
 

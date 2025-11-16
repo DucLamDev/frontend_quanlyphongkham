@@ -38,7 +38,7 @@ export default function Contact() {
     setIsSubmitting(true)
     try {
       const subjectLabel = subjectOptions.find(option => option.value === formData.subject)?.label || 'Liên hệ'
-      await axios.post('http://localhost:5000/api/questions', {
+      await axios.post('https://quanlyphongkham-be.onrender.com/api/questions', {
         fullName: formData.name,
         phone: formData.phone,
         email: formData.email,

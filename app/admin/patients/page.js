@@ -43,7 +43,7 @@ export default function PatientsManagement() {
   const fetchPatients = async (authToken = token) => {
     try {
       setLoading(true)
-      const response = await axios.get('http://localhost:5000/api/admin/patients?limit=100', {
+      const response = await axios.get('https://quanlyphongkham-be.onrender.com/api/admin/patients?limit=100', {
         headers: { Authorization: `Bearer ${authToken}` }
       })
       if (response.data.success) {
@@ -97,14 +97,14 @@ export default function PatientsManagement() {
     try {
       if (selectedPatient) {
         await axios.put(
-          `http://localhost:5000/api/admin/patients/${selectedPatient._id}`,
+          `https://quanlyphongkham-be.onrender.com/api/admin/patients/${selectedPatient._id}`,
           formData,
           { headers: { Authorization: `Bearer ${token}` } }
         )
         toast.success('Cập nhật bệnh nhân thành công')
       } else {
         await axios.post(
-          'http://localhost:5000/api/admin/patients',
+          'https://quanlyphongkham-be.onrender.com/api/admin/patients',
           formData,
           { headers: { Authorization: `Bearer ${token}` } }
         )
@@ -120,7 +120,7 @@ export default function PatientsManagement() {
   const deletePatient = async (id) => {
     if (!token || !confirm('Bạn có chắc muốn xóa bệnh nhân này?')) return
     try {
-      await axios.delete(`http://localhost:5000/api/admin/patients/${id}`, {
+      await axios.delete(`https://quanlyphongkham-be.onrender.com/api/admin/patients/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       toast.success('Đã xóa bệnh nhân')

@@ -34,7 +34,7 @@ export default function AnalyticsPage() {
   const fetchAnalytics = async (authToken, range) => {
     try {
       setLoading(true)
-      const response = await axios.get(`http://localhost:5000/api/admin/analytics?range=${range}`, {
+      const response = await axios.get(`https://quanlyphongkham-be.onrender.com/api/admin/analytics?range=${range}`, {
         headers: { Authorization: `Bearer ${authToken}` }
       })
       if (response.data.success) {
@@ -49,7 +49,7 @@ export default function AnalyticsPage() {
 
   const exportData = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/admin/analytics/export?range=${timeRange}`, {
+      const response = await axios.get(`https://quanlyphongkham-be.onrender.com/api/admin/analytics/export?range=${timeRange}`, {
         headers: { Authorization: `Bearer ${token}` },
         responseType: 'blob'
       })

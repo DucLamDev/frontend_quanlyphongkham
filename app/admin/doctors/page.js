@@ -43,7 +43,7 @@ export default function DoctorsManagement() {
   const fetchDoctors = async (authToken = token) => {
     try {
       setLoading(true)
-      const response = await axios.get('http://localhost:5000/api/admin/doctors', {
+      const response = await axios.get('https://quanlyphongkham-be.onrender.com/api/admin/doctors', {
         headers: { Authorization: `Bearer ${authToken}` }
       })
       if (response.data.success) {
@@ -95,14 +95,14 @@ export default function DoctorsManagement() {
     try {
       if (editingDoctor) {
         await axios.put(
-          `http://localhost:5000/api/admin/doctors/${editingDoctor._id}`,
+          `https://quanlyphongkham-be.onrender.com/api/admin/doctors/${editingDoctor._id}`,
           formData,
           { headers: { Authorization: `Bearer ${token}` } }
         )
         toast.success('Cập nhật bác sĩ thành công')
       } else {
         await axios.post(
-          'http://localhost:5000/api/admin/doctors',
+          'https://quanlyphongkham-be.onrender.com/api/admin/doctors',
           formData,
           { headers: { Authorization: `Bearer ${token}` } }
         )
@@ -118,7 +118,7 @@ export default function DoctorsManagement() {
   const deleteDoctor = async (id) => {
     if (!token || !confirm('Bạn có chắc muốn xóa bác sĩ này?')) return
     try {
-      await axios.delete(`http://localhost:5000/api/admin/doctors/${id}`, {
+      await axios.delete(`https://quanlyphongkham-be.onrender.com/api/admin/doctors/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       toast.success('Đã xóa bác sĩ')

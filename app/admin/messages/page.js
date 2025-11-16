@@ -46,7 +46,7 @@ export default function MessagesManagement() {
     try {
       setLoading(true)
       const query = status !== 'all' ? `?status=${status}` : ''
-      const response = await axios.get(`http://localhost:5000/api/questions${query}`, {
+      const response = await axios.get(`https://quanlyphongkham-be.onrender.com/api/questions${query}`, {
         headers: { Authorization: `Bearer ${authToken}` }
       })
       if (response.data.success) {
@@ -86,7 +86,7 @@ export default function MessagesManagement() {
 
     try {
       await axios.patch(
-        `http://localhost:5000/api/questions/${selectedMessage._id}`,
+        `https://quanlyphongkham-be.onrender.com/api/questions/${selectedMessage._id}`,
         { answer, status: answerStatus || 'answered' },
         { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -102,7 +102,7 @@ export default function MessagesManagement() {
     if (!token) return
     try {
       await axios.patch(
-        `http://localhost:5000/api/questions/${message._id}`,
+        `https://quanlyphongkham-be.onrender.com/api/questions/${message._id}`,
         { status: 'closed' },
         { headers: { Authorization: `Bearer ${token}` } }
       )

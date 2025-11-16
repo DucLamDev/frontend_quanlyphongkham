@@ -68,7 +68,7 @@ export default function EquipmentManagement() {
       if (filterCategory) params.push(`category=${filterCategory}`)
       if (filterStatus) params.push(`status=${filterStatus}`)
       const query = params.length ? `?${params.join('&')}` : ''
-      const response = await axios.get(`http://localhost:5000/api/admin/equipment${query}`, {
+      const response = await axios.get(`https://quanlyphongkham-be.onrender.com/api/admin/equipment${query}`, {
         headers: { Authorization: `Bearer ${authToken}` }
       })
       if (response.data.success) {
@@ -127,14 +127,14 @@ export default function EquipmentManagement() {
     try {
       if (editingEquipment) {
         await axios.put(
-          `http://localhost:5000/api/admin/equipment/${editingEquipment._id}`,
+          `https://quanlyphongkham-be.onrender.com/api/admin/equipment/${editingEquipment._id}`,
           formData,
           { headers: { Authorization: `Bearer ${token}` } }
         )
         toast.success('Cập nhật thiết bị thành công')
       } else {
         await axios.post(
-          'http://localhost:5000/api/admin/equipment',
+          'https://quanlyphongkham-be.onrender.com/api/admin/equipment',
           formData,
           { headers: { Authorization: `Bearer ${token}` } }
         )
@@ -150,7 +150,7 @@ export default function EquipmentManagement() {
   const deleteEquipment = async (id) => {
     if (!token || !confirm('Bạn có chắc muốn xóa thiết bị này?')) return
     try {
-      await axios.delete(`http://localhost:5000/api/admin/equipment/${id}`, {
+      await axios.delete(`https://quanlyphongkham-be.onrender.com/api/admin/equipment/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       toast.success('Đã xóa thiết bị')

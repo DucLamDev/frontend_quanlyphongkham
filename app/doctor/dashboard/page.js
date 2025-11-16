@@ -27,7 +27,7 @@ export default function DoctorDashboard() {
   const fetchAppointments = async (doctorId) => {
     try {
       setLoading(true)
-      const response = await axios.get(`http://localhost:5000/api/doctor/${doctorId}/appointments`)
+      const response = await axios.get(`https://quanlyphongkham-be.onrender.com/api/doctor/${doctorId}/appointments`)
       if (response.data.success) {
         setAppointments(response.data.data)
       }
@@ -41,7 +41,7 @@ export default function DoctorDashboard() {
   const updateAppointmentStatus = async (appointmentId, status) => {
     try {
       const response = await axios.patch(
-        `http://localhost:5000/api/admin/appointments/${appointmentId}`,
+        `https://quanlyphongkham-be.onrender.com/api/admin/appointments/${appointmentId}`,
         { status },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem('adminToken')}` }

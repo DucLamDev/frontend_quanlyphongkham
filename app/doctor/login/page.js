@@ -17,7 +17,7 @@ export default function DoctorLogin() {
     setLoading(true)
 
     try {
-      const response = await axios.post('http://localhost:5000/api/doctor/login', {
+      const response = await axios.post('https://quanlyphongkham-be.onrender.com/api/doctor/login', {
         email,
         password
       })

@@ -25,7 +25,7 @@ export default function PatientDashboard() {
   const fetchAppointments = async (phone) => {
     try {
       setLoading(true)
-      const response = await axios.get(`http://localhost:5000/api/patient/${phone}/appointments`)
+      const response = await axios.get(`https://quanlyphongkham-be.onrender.com/api/patient/${phone}/appointments`)
       if (response.data.success) {
         setAppointments(response.data.data)
       }
@@ -41,7 +41,7 @@ export default function PatientDashboard() {
 
     try {
       const response = await axios.patch(
-        `http://localhost:5000/api/patient/appointments/${appointmentId}/cancel`,
+        `https://quanlyphongkham-be.onrender.com/api/patient/appointments/${appointmentId}/cancel`,
         { phone: patientPhone }
       )
       if (response.data.success) {
