@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Award, Users, Clock, Shield, Heart, Target, CheckCircle, Star, GraduationCap } from 'lucide-react'
+import { Award, Users, Clock, Shield, Heart, Target, CheckCircle, Star } from 'lucide-react'
 import Image from 'next/image'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -61,37 +61,35 @@ export default function About() {
   ]
 
   const team = [
-  {
-      name: 'BS. Nguyễn Trung Chính',
-      title: 'PGS. TS.BS',
-      specialty: 'Giám đốc chuyên môn Bệnh viện Đa Khoa Phương Đông',
-      image: 'https://benhvienphuongdong.vn/public/uploads/doi-ngu-bac-si/thumbs/350x0/bs-nguyen-trung-chinh_4.png',
-      experience: '30+ năm',
+    {
+      name: 'BS. Nguyễn Văn Minh',
+      position: 'Giám đốc Y khoa',
+      experience: '15 năm kinh nghiệm',
+      specialty: 'Nội khoa tổng hợp',
+      image: '/img/dichvu1.jpg'
     },
     {
-      name: 'BS. Hàn Văn Ba',
-      title: 'Bác sĩ',
-      specialty: 'Chuyên khoa Nội',
-      image: 'https://benhvienphuongdong.vn/public/uploads/doi-ngu-bac-si/thumbs/350x0/bs-han-van-ba_2.png',
-      experience: '15+ năm',
+      name: 'BS. Trần Thị Lan',
+      position: 'Trưởng khoa Sản',
+      experience: '12 năm kinh nghiệm',
+      specialty: 'Sản - Phụ khoa',
+      image: '/img/dichvu2.jpg'
     },
     {
-      name: 'BS. Trần Đình Hà',
-      title: 'Bác sĩ',
-      specialty: 'Chuyên khoa Nội',
-      image: 'https://benhvienphuongdong.vn/public/uploads/doi-ngu-bac-si/tran-dinh-ha/tran-dinh-ha.png',
-      experience: '12+ năm',
+      name: 'BS. Lê Văn Hùng',
+      position: 'Trưởng khoa Tim mạch',
+      experience: '10 năm kinh nghiệm',
+      specialty: 'Tim mạch',
+      image: '/img/dichvu3.jpg'
     },
     {
-      name: 'BS. Đồng Khắc Hùng',
-      title: 'Bác sĩ',
-      specialty: 'Chuyên khoa Nhi',
-      image: 'https://benhvienphuongdong.vn/public/uploads/doi-ngu-bac-si/bs-dong-khac-hung.png',
-      experience: '10+ năm',
-    },
+      name: 'BS. Phạm Thị Mai',
+      position: 'Trưởng khoa Nhi',
+      experience: '8 năm kinh nghiệm',
+      specialty: 'Nhi khoa',
+      image: '/img/dichvu4.jpg'
+    }
   ]
-
-  
 
   return (
     <main className="min-h-screen">
@@ -188,7 +186,7 @@ export default function About() {
             >
               <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
                 <Image
-                  src="./img/dichvu4.jpg"
+                  src="./img/banner.jpg"
                   alt="Phòng Khám Minh Giang"
                   fill
                   className="object-cover"
@@ -320,50 +318,21 @@ export default function About() {
                 whileHover={{ y: -10 }}
                 className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all group"
               >
-                     {/* Doctor Image */}
-              <div className="relative h-80 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
-                <div className="absolute inset-0 flex items-end justify-center">
+                <div className="relative h-64">
                   <Image
-                    src={member.image}
+                    src={member.image.replace('/img/', './img/')}
                     alt={member.name}
-                    width={300}
-                    height={320}
-                    className="object-contain object-bottom h-full w-auto"
-                    unoptimized
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 
-                {/* Badge */}
-                <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-semibold text-primary-600 shadow-md">
-                  {member.experience}
+                <div className="p-6">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">{member.name}</h3>
+                  <p className="text-primary-600 font-semibold mb-2">{member.position}</p>
+                  <p className="text-sm text-gray-600 mb-2">{member.experience}</p>
+                  <p className="text-sm text-gray-500">{member.specialty}</p>
                 </div>
-              </div>
-
-              {/* Doctor Info */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-1">
-                  {member.name}
-                </h3>
-                <p className="text-primary-600 font-semibold mb-3">
-                  {member.title}
-                </p>
-                <p className="text-gray-600 mb-4 flex items-start gap-2">
-                  <GraduationCap size={18} className="text-primary-500 mt-1 flex-shrink-0" />
-                  <span>{member.specialty}</span>
-                </p>
-
-                {/* Stats */}
-                <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
-                  <div className="flex items-center gap-1 text-gray-600">
-                    <Award size={16} className="text-primary-500" />
-                    <span className="text-sm">Chuyên gia</span>
-                  </div>
-                  <div className="flex items-center gap-1 text-gray-600">
-                    <Heart size={16} className="text-red-500" />
-                    <span className="text-sm">Tận tâm</span>
-                  </div>
-                </div>
-              </div>
               </motion.div>
             ))}
           </div>

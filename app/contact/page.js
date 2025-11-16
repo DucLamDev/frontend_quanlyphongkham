@@ -5,6 +5,8 @@ import { motion } from 'framer-motion'
 import { Phone, Mail, MapPin, Clock, Send, MessageCircle, Calendar, Users } from 'lucide-react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import toast from 'react-hot-toast'
+import axios from 'axios'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -14,6 +16,15 @@ export default function Contact() {
     subject: '',
     message: ''
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const subjectOptions = [
+    { value: 'appointment', label: 'Đặt lịch khám' },
+    { value: 'consultation', label: 'Tư vấn sức khỏe' },
+    { value: 'service', label: 'Hỏi về dịch vụ' },
+    { value: 'complaint', label: 'Khiếu nại' },
+    { value: 'other', label: 'Khác' }
+  ]
 
   const handleInputChange = (e) => {
     setFormData({
@@ -22,10 +33,31 @@ export default function Contact() {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', formData)
+    setIsSubmitting(true)
+    try {
+      const subjectLabel = subjectOptions.find(option => option.value === formData.subject)?.label || 'Liên hệ'
+      await axios.post('http://localhost:5000/api/questions', {
+        fullName: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        question: `[${subjectLabel}] ${formData.message}`
+      })
+      toast.success('Tin nhắn đã được gửi. Chúng tôi sẽ liên hệ lại sớm nhất!')
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+      })
+    } catch (error) {
+      console.error('Contact form error:', error)
+      toast.error(error.response?.data?.message || 'Không thể gửi tin nhắn, vui lòng thử lại!')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const contactInfo = [
@@ -214,11 +246,11 @@ export default function Contact() {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
                   >
                     <option value="">Chọn chủ đề</option>
-                    <option value="appointment">Đặt lịch khám</option>
-                    <option value="consultation">Tư vấn sức khỏe</option>
-                    <option value="service">Hỏi về dịch vụ</option>
-                    <option value="complaint">Khiếu nại</option>
-                    <option value="other">Khác</option>
+                    {subjectOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
@@ -239,10 +271,20 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  className="w-full bg-primary-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-primary-700 transition-colors shadow-lg hover:shadow-xl inline-flex items-center justify-center gap-2"
+                  disabled={isSubmitting}
+                  className="w-full bg-primary-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-primary-700 transition-colors shadow-lg hover:shadow-xl inline-flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  <Send size={20} />
-                  Gửi Tin Nhắn
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                      Đang gửi...
+                    </>
+                  ) : (
+                    <>
+                      <Send size={20} />
+                      Gửi Tin Nhắn
+                    </>
+                  )}
                 </button>
               </form>
             </motion.div>

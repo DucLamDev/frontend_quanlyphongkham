@@ -1,39 +1,68 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { Calendar, Clock, User, Phone, Mail, FileText, Send, Shield } from 'lucide-react'
 import toast from 'react-hot-toast'
 import axios from 'axios'
-import VoucherPopup from './VoucherPopup'
 
 const AppointmentForm = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm()
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [showVoucher, setShowVoucher] = useState(false)
-
-  const specialties = [
-    'Tư vấn khám',
-    'Trả lời bệnh',
-    'Bằng giá',
-    'Hỏi giáp bác sĩ',
-    'Sao răng',
+  const defaultSpecialties = [
+    'Khám tổng quát',
+    'Sản - Phụ khoa',
+    'Tim mạch',
+    'Nhi - Tiêm chủng',
+    'Tai - Mũi - Họng',
+    'Răng hàm mặt',
+    'Chẩn đoán hình ảnh',
+    'Tư vấn sức khỏe',
     'Khác'
   ]
+  const [specialties, setSpecialties] = useState(defaultSpecialties)
+  const [loadingSpecialties, setLoadingSpecialties] = useState(true)
+
+  useEffect(() => {
+    const fetchSpecialties = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/appointments/specialties')
+        if (response.data.success && response.data.data.length) {
+          setSpecialties(response.data.data)
+        }
+      } catch (error) {
+        console.error('Error fetching specialties:', error)
+      } finally {
+        setLoadingSpecialties(false)
+      }
+    }
+    fetchSpecialties()
+  }, [])
 
   const onSubmit = async (data) => {
+    // Validate past time
+    if (data.appointmentDate && data.appointmentTime) {
+      const now = new Date()
+      const selected = new Date(`${data.appointmentDate}T${data.appointmentTime}`)
+      
+      if (selected < now) {
+        toast.error('Không thể đặt lịch vào thời gian trong quá khứ')
+        return
+      }
+    }
+    
     setIsSubmitting(true)
     try {
-      const response = await axios.post('https://quanlyphongkham-be.onrender.com/api/appointments', {
+      const response = await axios.post('http://localhost:5000/api/appointments', {
         ...data,
         appointmentDate: data.appointmentDate,
         appointmentTime: data.appointmentTime
       })
 
       if (response.data.success) {
+        toast.success('Đặt lịch thành công! Chúng tôi đã gửi thông báo đến số điện thoại của bạn.')
         reset()
-        setShowVoucher(true)
       }
     } catch (error) {
       console.error('Error:', error)
@@ -44,31 +73,24 @@ const AppointmentForm = () => {
   }
 
   return (
-    <>
-      <VoucherPopup 
-        isOpen={showVoucher} 
-        onClose={() => setShowVoucher(false)}
-        voucherCode="KHAM10"
-      />
-      
-      <section id="appointment" className="py-20 bg-gradient-to-br from-blue-50 to-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Đặt Lịch Khám Chữa Bệnh
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Điền thông tin vào form dưới đây để đặt lịch khám. Chúng tôi sẽ liên hệ xác nhận trong thời gian sớm nhất.
-            </p>
-          </motion.div>
+    <section id="appointment" className="py-20 bg-gradient-to-br from-blue-50 to-white">
+      <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Đặt Lịch Khám Chữa Bệnh
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Điền thông tin vào form dưới đây để đặt lịch khám. Chúng tôi sẽ liên hệ xác nhận trong thời gian sớm nhất.
+          </p>
+        </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Left - Form */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -150,7 +172,7 @@ const AppointmentForm = () => {
                   {...register('specialty', { required: 'Vui lòng chọn chuyên khoa' })}
                   className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary-500 focus:ring-4 focus:ring-primary-100 focus:outline-none transition-all duration-300"
                 >
-                  <option value="">Chọn chuyên khoa</option>
+                  <option value="">{loadingSpecialties ? 'Đang tải danh sách...' : 'Chọn chuyên khoa'}</option>
                   {specialties.map((specialty, index) => (
                     <option key={index} value={specialty}>
                       {specialty}
@@ -308,10 +330,9 @@ const AppointmentForm = () => {
               </div>
             </div>
           </motion.div>
-          </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   )
 }
 

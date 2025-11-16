@@ -22,7 +22,7 @@ export default function AdminLogin() {
     setLoading(true)
 
     try {
-      const response = await axios.post('https://quanlyphongkham-be.onrender.com/api/admin/login', formData)
+      const response = await axios.post('http://localhost:5000/api/admin/login', formData)
       
       if (response.data.success) {
         // Save token to localStorage
